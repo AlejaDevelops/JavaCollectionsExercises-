@@ -9,7 +9,7 @@ está en la lista, se eliminará el perro que ingresó el usuario y se mostrará
 ordenada. Si el perro no se encuentra en la lista, se le informará al usuario y se mostrará
 la lista ordenada.
  */
-package E1RazasPerros;
+package E1_E2RazasPerros;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,7 +18,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author Computador 1
+ * @author AlejaDevelops
  */
 public class RazasPerros {
 
@@ -44,20 +44,18 @@ public class RazasPerros {
         System.out.println(" ");
         System.out.println("Ingresa una raza de perro a buscar en la lista");
         String razaB = leer.nextLine();
-        
-        Iterator it = razasPerros.iterator();
-        
-        while (it.hasNext()) {
-            if (it.next().equals(razaB)) {
-                it.remove();
-            }            
-        }
-        if (razasPerros.contains(razaB)) {
-            System.out.println("La raza ingresada si fue encontrada en la lista");
-        }else{
+                
+        if (!razasPerros.contains(razaB)) {
             System.out.println("La raza ingresada no fue encontrada en la lista");
-        }
-        
+        }else{
+            Iterator it = razasPerros.iterator();
+            while (it.hasNext()) {
+            if (it.next().equals(razaB)) {
+                it.remove();            }            
+            }
+            System.out.println("La raza ingresada fue removida de la lista");
+        }             
+                
         Collections.sort(razasPerros);
         
         for (String aux : razasPerros) {
