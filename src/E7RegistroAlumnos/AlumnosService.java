@@ -128,11 +128,14 @@ public class AlumnosService {
                 v.add(aux);
             }            
         }
-        System.out.println("Estudiantes argentinos: ");
+        System.out.println("Cantidad de estudiantes argentinos: "+a.size()
+                +"\n Listado:");
         imprimirArrayList(a);
-        System.out.println("Estudiantes chilenos: ");
+        System.out.println("Cantidad de estudiantes chilenos: "+c.size()
+                +"\n Listado:");
         imprimirArrayList(c);
-        System.out.println("Estudiantes venezolanos: ");
+        System.out.println("Cantidad de estudiantes venezolanos: "+v.size()
+                +"\n Listado:");
         imprimirArrayList(v);
         
     }

@@ -51,13 +51,14 @@ public class AlumnosMain {
         Alumnos alumno = as.validarEstudiante(listaAlumnos);
         System.out.println("La edad de "+alumno.getNombre()+" es "+as.calculadoraEdad(alumno)+ " años");        
         
-        System.out.println("---------------------------------------------------");
-        as.clasificacionNacionalidad(listaAlumnos);
+       
+        
         
         System.out.println("---------------------------------------------------");
         System.out.println("*** Reporte final ***");
         as.alumnosMayores25(listaAlumnos);
         as.inicialesAlumnos(listaAlumnos);
+        as.clasificacionNacionalidad(listaAlumnos);
         
     }
     
