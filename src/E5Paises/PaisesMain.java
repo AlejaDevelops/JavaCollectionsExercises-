@@ -13,6 +13,8 @@ al usuario.
  */
 package E5Paises;
 
+import java.util.TreeSet;
+
 /**
  *
  * @author AlejaDevelops
@@ -23,7 +25,9 @@ public class PaisesMain {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        PaisesService ps = new PaisesService();
+        TreeSet<String> setPaises = ps.guardarPaises();
+        ps.eliminarPais(setPaises);
     }
     
 }

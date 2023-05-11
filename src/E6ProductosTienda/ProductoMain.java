@@ -13,6 +13,13 @@ package E6ProductosTienda;
  *
  * @author AlejaDevelops
  */
-public class Productos {
+public class ProductoMain {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+    }
     
 }

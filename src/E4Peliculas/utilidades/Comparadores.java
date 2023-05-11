@@ -9,7 +9,8 @@ Después, esa Pelicula se guarda una lista de Peliculas y se le pregunta al usua
 crear otra Pelicula o no.
 Después de ese bucle realizaremos las siguientes acciones:
 22
-• Mostrar en pantalla todas las películas.
+• Mostrar en pantalla todas las películas. 
+
 • Mostrar en pantalla todas las películas con una duración mayor a 1 hora.
 • Ordenar las películas de acuerdo a su duración (de mayor a menor) y mostrarlo en
 pantalla.
@@ -18,19 +19,31 @@ pantalla.
 • Ordenar las películas por título, alfabéticamente y mostrarlo en pantalla.
 • Ordenar las películas por director, alfabéticamente y mostrarlo en pantalla.
  */
-package E4Peliculas;
+package E4Peliculas.utilidades;
 
-/**
- *
- * @author AlejaDevelops
- */
-public class PeliculasMain {
+import E4Peliculas.Pelicula;
+import java.util.Comparator;
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
+public class Comparadores {
     
+    public static Comparator<Pelicula> ordenPorDuracionDescen = new Comparator<Pelicula> () {
+        @Override
+        public int compare(Pelicula t, Pelicula t1) {
+            return t1.getDuracion().compareTo(t.getDuracion());
+        }
+    };
+    
+    public static Comparator<Pelicula> ordenPorTitulo = new Comparator<Pelicula> () {
+        @Override
+        public int compare(Pelicula t, Pelicula t1) {
+            return t.getTitulo().compareToIgnoreCase(t1.getTitulo());
+        }
+    };
+    
+    public static Comparator<Pelicula> ordenPorDirector = new Comparator<Pelicula> () {
+        @Override
+        public int compare(Pelicula t, Pelicula t1) {
+            return t.getDirector().compareToIgnoreCase(t1.getDirector());
+        }
+    };
 }

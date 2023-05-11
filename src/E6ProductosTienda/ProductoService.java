@@ -9,17 +9,19 @@ Realizar un menú para lograr todas las acciones previamente mencionadas.
  */
 package E6ProductosTienda;
 
+import java.util.Scanner;
+
 /**
  *
  * @author AlejaDevelops
  */
-public class ProductosMain {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
+public class ProductoService {
+    Scanner leer = new Scanner(System.in).useDelimiter("\n");
     
+    public Producto crearProdcutos(){
+        do {
+            
+            
+        } while (true);
+    }
 }
