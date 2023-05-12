@@ -18,22 +18,22 @@ Recordar:
  */
 package E7RegistroAlumnos;
 
-
+import E7RegistroAlumnos.utilidades.Comparadores;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
-
+import java.util.Collections;
 
 /**
  *
  * @author AlejaDevelops
  */
 public class AlumnosService {
+
     Scanner leer = new Scanner(System.in).useDelimiter("\n");
-    
-    
-    public ArrayList<Alumnos> crearListaAlumnos(){
-        ArrayList<Alumnos> listaAlumnos = new ArrayList();
+
+    public ArrayList<Alumnos> crearListaAlumnos(ArrayList<Alumnos> listaAlumnos) {
+
         Alumnos alumno1 = new Alumnos("Erick", "Garcia", "Argentina", 1, 12, 1995);
         Alumnos alumno2 = new Alumnos("Ana", "Pérez", "Chile", 10, 5, 1998);
         Alumnos alumno3 = new Alumnos("Carlos", "López", "Argentina", 3, 9, 1997);
@@ -74,49 +74,49 @@ public class AlumnosService {
         listaAlumnos.add(alumno18);
         listaAlumnos.add(alumno19);
         listaAlumnos.add(alumno20);
-        
+
         return listaAlumnos;
-        
+
     }
-    
-    public void imprimirArrayList(ArrayList<Alumnos> a){
+
+    public void imprimirArrayList(ArrayList<Alumnos> a) {
         for (Alumnos aux : a) {
-            System.out.println("NOMBRE: "+aux.getNombre()+ " - APELLIDO: "+aux.getApellido()+" - NACIONALIDAD: "+aux.getNacionalidad()+" - FECHA NACIMIENTO: "+aux.getDia()+"/"+aux.getMes()+"/"+aux.getAnio());
+            System.out.println("NOMBRE: " + aux.getNombre() + " - APELLIDO: " + aux.getApellido() + " - NACIONALIDAD: " + aux.getNacionalidad() + " - FECHA NACIMIENTO: " + aux.getDia() + "/" + aux.getMes() + "/" + aux.getAnio());
         }
     }
-    
-    public Alumnos validarEstudiante(ArrayList<Alumnos> b){
+
+    public Alumnos validarEstudiante(ArrayList<Alumnos> b) {
         System.out.println("Ingresa el nombre de un estudiante");
-        String nombre = leer.nextLine();        
+        String nombre = leer.next();
         boolean flag = false;
         Alumnos alumno = new Alumnos();
-        
+
         for (Alumnos aux : b) {
-            if (aux.getNombre().equalsIgnoreCase(nombre)) {                
+            if (aux.getNombre().equalsIgnoreCase(nombre)) {
                 alumno = aux;
-                flag = true;                
+                flag = true;
             }
         }
         if (!flag) {
             System.out.println("El estudiante no se encuentra en la lista");
         }
-        return alumno;  
-     }
-    
-    public int calculadoraEdad(Alumnos c){       
-            
-        Date fechaNac = new Date(c.getAnio()-1900,c.getMes()-1,c.getDia());
+        return alumno;
+    }
+
+    public int calculadoraEdad(Alumnos c) {
+
+        Date fechaNac = new Date(c.getAnio() - 1900, c.getMes() - 1, c.getDia());
         Date hoy = new Date();
-        Date edad = new Date(hoy.getYear()-fechaNac.getYear(),hoy.getMonth()-fechaNac.getMonth(),hoy.getDate()-fechaNac.getDate());
- 
+        Date edad = new Date(hoy.getYear() - fechaNac.getYear(), hoy.getMonth() - fechaNac.getMonth(), hoy.getDate() - fechaNac.getDate());
+
         return edad.getYear();
     }
-    
-    public void clasificacionNacionalidad(ArrayList<Alumnos> d){
+
+    public void clasificacionNacionalidad(ArrayList<Alumnos> d) {
         ArrayList<Alumnos> a = new ArrayList();
         ArrayList<Alumnos> c = new ArrayList();
         ArrayList<Alumnos> v = new ArrayList();
-        
+
         for (Alumnos aux : d) {
             if (aux.getNacionalidad().equalsIgnoreCase("argentina")) {
                 a.add(aux);
@@ -126,40 +126,126 @@ public class AlumnosService {
             }
             if (aux.getNacionalidad().equalsIgnoreCase("venezuela")) {
                 v.add(aux);
-            }            
-        }
-        System.out.println("Cantidad de estudiantes argentinos: "+a.size()
-                +"\n Listado:");
-        imprimirArrayList(a);
-        System.out.println("Cantidad de estudiantes chilenos: "+c.size()
-                +"\n Listado:");
-        imprimirArrayList(c);
-        System.out.println("Cantidad de estudiantes venezolanos: "+v.size()
-                +"\n Listado:");
-        imprimirArrayList(v);
-        
-    }
-    
-    public void alumnosMayores25(ArrayList<Alumnos> e){
-        int edad;
-        int cont=0;
-        for (Alumnos aux : e) {
-            edad = calculadoraEdad(aux);
-            if (edad>25) {
-                cont+=1;                
             }
         }
-        System.out.println("la cantidad de estudiantes con mas de 25 años son: "+cont);
+        System.out.println("Cantidad de estudiantes argentinos: " + a.size()
+                + "\n Listado:");
+        imprimirArrayList(a);
+        System.out.println("Cantidad de estudiantes chilenos: " + c.size()
+                + "\n Listado:");
+        imprimirArrayList(c);
+        System.out.println("Cantidad de estudiantes venezolanos: " + v.size()
+                + "\n Listado:");
+        imprimirArrayList(v);
+
     }
-   
-    public void inicialesAlumnos(ArrayList<Alumnos> f){
+
+    public void alumnosMayores25(ArrayList<Alumnos> e) {
+        int edad;
+        int cont = 0;
+        for (Alumnos aux : e) {
+            edad = calculadoraEdad(aux);
+            if (edad > 25) {
+                cont += 1;
+            }
+        }
+        System.out.println("la cantidad de estudiantes con mas de 25 años son: " + cont);
+    }
+
+    public void inicialesAlumnos(ArrayList<Alumnos> f) {
         int cont = 0;
         for (Alumnos aux : f) {
             if (aux.getApellido().startsWith("P") || aux.getApellido().startsWith("L")) {
-                cont+=1;
+                cont += 1;
             }
         }
-        System.out.println("Exiten "+cont+" estudiantes cuyos apellidos inician por P o L");
+        System.out.println("Exiten " + cont + " estudiantes cuyos apellidos inician por P o L");
     }
-    
+
+    public void altaAlumno(ArrayList<Alumnos> f) {
+        Alumnos alumnoNuevo = new Alumnos();
+        System.out.println("Ingresa los datos del estudiante "
+                + "\n Nombre:");
+        alumnoNuevo.setNombre(leer.next());
+        System.out.println("Apellido");
+        alumnoNuevo.setApellido(leer.next());
+        System.out.println("Nacionalidad: ");
+        alumnoNuevo.setNacionalidad(leer.next());
+        System.out.println("Fecha de nacimiento: "
+                + "\n Dia");
+        alumnoNuevo.setDia(leer.nextInt());
+        System.out.println("Mes");
+        alumnoNuevo.setMes(leer.nextInt());
+        System.out.println("Año");
+        alumnoNuevo.setAnio(leer.nextInt());
+        f.add(alumnoNuevo);
+    }
+
+    public void menu() {
+        ArrayList<Alumnos> listaAlumnos = new ArrayList();
+        int option;
+
+        do {
+            System.out.println("--------------------------------------------");
+            System.out.println("Elige una opción del menú: "
+                    + "\n 1 - Cargar primeros 20 estudiantes "
+                    + "\n 2 - Agregar un nuevo estudiante"
+                    + "\n   - Editar los datos de un estudiante"
+                    + "\n   - Eliminar un estudiante"
+                    + "\n 3 - Ordenar estudiantes por apellido, forma ascendente"
+                    + "\n 4 - Ordenar estudiantes por nombre, forma descendente"
+                    + "\n 5 - Validar la edad de un estudiante"
+                    + "\n 6 - Solicitar un reporte final "
+                    + "\n 7 - Imprimir listado de estudiantes"
+                    + "\n 8 - Salir");
+            option = leer.nextInt();
+
+            switch (option) {
+                case 1:
+                    System.out.println("--------------------------------------------");
+                    System.out.println("Cargando lista... "
+                            + "\n ...");
+                    crearListaAlumnos(listaAlumnos);
+                    System.out.println("Lista cargada...");
+                    break;
+                case 2:
+                    System.out.println("--------------------------------------------");
+                    altaAlumno(listaAlumnos);
+                    break;
+                case 3:
+                    System.out.println("--------------------------------------------");
+                    Collections.sort(listaAlumnos, Comparadores.ordenPorApellidoAsce);
+                    break;
+                case 4:
+                    System.out.println("--------------------------------------------");
+                    Collections.sort(listaAlumnos, Comparadores.ordenPorNombreDescen);
+                    break;
+                case 5:
+                    System.out.println("--------------------------------------------");
+                    Alumnos alumno = validarEstudiante(listaAlumnos);
+                    System.out.println("La edad de " + alumno.getNombre() + " es " + calculadoraEdad(alumno) + " años");
+                    break;
+                case 6:
+                    System.out.println("--------------------------------------------");
+                    System.out.println("*** Reporte final ***");
+                    alumnosMayores25(listaAlumnos);
+                    inicialesAlumnos(listaAlumnos);
+                    clasificacionNacionalidad(listaAlumnos);
+                    break;
+                case 7:
+                    System.out.println("--------------------------------------------");
+                    imprimirArrayList(listaAlumnos);
+                    break;
+                case 8:
+                    System.out.println("--------------------------------------------");
+                    System.out.println("Bye!");
+                    break;
+                default:
+                    System.out.println("--------------------------------------------");
+                    System.out.println("Opción no válida. Intente nuevamente");
+            }
+
+        } while (option != 8);
+    }
+
 }

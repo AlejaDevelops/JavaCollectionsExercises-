@@ -18,8 +18,8 @@ Recordar:
 package E7RegistroAlumnos;
 
 import E7RegistroAlumnos.utilidades.Comparadores;
-import java.util.ArrayList;
-import java.util.Collections;
+
+
 
 
 /**
@@ -34,31 +34,10 @@ public class AlumnosMain {
     public static void main(String[] args) {
         System.out.println("***LISTA DE ESTUDIANTES ***");
         AlumnosService as = new AlumnosService();
-        ArrayList<Alumnos> listaAlumnos = as.crearListaAlumnos();
-        System.out.println("Cargando lista...");
-       
-        System.out.println("---------------------------------------------------");        
-        System.out.println("Lista de estudiantes ordenados por apellido, forma ascendente: ");
-        Collections.sort(listaAlumnos, Comparadores.ordenPorApellidoAsce); 
-        as.imprimirArrayList(listaAlumnos);
-        
-        System.out.println("---------------------------------------------------");
-        System.out.println("Lista de estudiantes ordenados por nombre, forma descendente: ");
-        Collections.sort(listaAlumnos, Comparadores.ordenPorNombreDescen);
-        as.imprimirArrayList(listaAlumnos);
-        
-        System.out.println("---------------------------------------------------");
-        Alumnos alumno = as.validarEstudiante(listaAlumnos);
-        System.out.println("La edad de "+alumno.getNombre()+" es "+as.calculadoraEdad(alumno)+ " años");        
-        
-       
+        as.menu();
         
         
-        System.out.println("---------------------------------------------------");
-        System.out.println("*** Reporte final ***");
-        as.alumnosMayores25(listaAlumnos);
-        as.inicialesAlumnos(listaAlumnos);
-        as.clasificacionNacionalidad(listaAlumnos);
+        
         
     }
     

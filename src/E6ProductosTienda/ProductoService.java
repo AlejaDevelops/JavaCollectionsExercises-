@@ -10,6 +10,7 @@ Realizar un menú para lograr todas las acciones previamente mencionadas.
 package E6ProductosTienda;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -18,10 +19,10 @@ import java.util.Scanner;
  * @author AlejaDevelops
  */
 public class ProductoService {
-    Scanner leer = new Scanner(System.in).useDelimiter("\n");
+    Scanner leer = new Scanner(System.in).useDelimiter("\n").useLocale(Locale.US);
     
     
-    public HashMap<String, Double> crearProdcutos(HashMap<String, Double> b){        
+    public HashMap<String, Double> crearProductos(HashMap<String, Double> b){        
         String nombre, option;
         Double precio;
         
@@ -39,12 +40,12 @@ public class ProductoService {
     }
     
     public void imprimirMap(HashMap<String, Double> a){
-        System.out.println("--- Listado de Productos ---");
+        System.out.println("------ Listado de Productos ------");
         for (Map.Entry<String, Double> entry : a.entrySet()) {
             System.out.println("Nombre: "+entry.getKey()+"   -- Precio: $"+entry.getValue());         
             
         }
-        System.out.println("------------------------------");
+        
     }
     
     public void menu(){
@@ -56,34 +57,71 @@ public class ProductoService {
                 + "\n 1 - Agregar productos"
                 + "\n 2 - Modificar un precio"
                 + "\n 3 - Eliminar un producto"
-                + "\n 4 - Modificar un nombre"
-                + "\n 5 - Ver listado de productos"
-                + "\n 6 - Salir");
+                + "\n 4 - Ver listado de productos"
+                + "\n 5 - Salir");
         option = leer.nextInt();
         
         switch (option){
             case 1:                
-                crearProdcutos(mapaProductos);
+                crearProductos(mapaProductos);
                 break;
             case 2:
-                
+                modificarPrecio(mapaProductos);
+                break;
             case 3:
-            
+                eliminarProducto(mapaProductos);
+                break;
             case 4:
-                
-            case 5:
                 imprimirMap(mapaProductos);
                 break;
-            case 6:
+            case 5:
                 System.out.println("Bye!");
-                break;
+            
             default:
                 System.out.println("Opción inválida, intenta nuevamente");           
                 
         }
             
-        } while (option!=6);
+        } while (option!=5);
         
     }
+    
+    private void modificarPrecio(HashMap<String, Double> c){
+        System.out.println("----------------------------");
+        System.out.println("Ingresa el nombre del producto al que deseas modificar su precio");
+        String nombre = leer.next();
+        boolean flag = false;
+        
+        for (Map.Entry<String, Double> entry : c.entrySet()) {
+            if (entry.getKey().equalsIgnoreCase(nombre)) {
+                System.out.println("Ingresa el nuevo precio");
+                entry.setValue(leer.nextDouble());
+                flag = true;
+            }         
+        }
+        if (!flag) {
+            System.out.println("El producto no se encuentra en la lista");
+        }
+    }
+    
+    private void eliminarProducto(HashMap<String, Double> d){
+        System.out.println("----------------------------");
+        System.out.println("Ingresa el nombre del producto que deseas eliminar");
+        String nombre = leer.next();
+        boolean flag = false;
+        
+        for (Map.Entry<String, Double> entry : d.entrySet()) {
+            if (entry.getKey().equalsIgnoreCase(nombre)) {
+                d.remove(nombre);
+                System.out.println("Producto eliminado");
+                flag = true;
+                break;
+            }           
+        }
+        if (!flag) {
+            System.out.println("El producto no se encuentra en la lista");
+        }
+    }
+    
     
 }
