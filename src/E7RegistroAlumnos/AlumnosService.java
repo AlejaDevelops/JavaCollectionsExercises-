@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.Collections;
+import java.util.Iterator;
 
 /**
  *
@@ -181,6 +182,76 @@ public class AlumnosService {
         f.add(alumnoNuevo);
     }
 
+    public void editarDatos(ArrayList<Alumnos> f) {
+        System.out.println("Ingresa el nombre del estudiante");
+        String nombre = leer.next();
+        int option;
+
+        for (Alumnos aux : f) {
+            if (aux.getNombre().equalsIgnoreCase(nombre)) {
+
+                do {
+                    System.out.println("Selecciona el dato que deseas modificar de acuerdo al siguiente menú: "
+                            + "\n 1 - Nombre"
+                            + "\n 2 - Apellido"
+                            + "\n 3 - Nacionalidad"
+                            + "\n 4 - Dia de nacimiento"
+                            + "\n 5 - Mes de nacimiento"
+                            + "\n 6 - Año de nacimiento"
+                            + "\n 7 - Salir");
+                    option = leer.nextInt();
+
+                    switch (option) {
+                        case 1:
+                            System.out.println("Ingresa el nuevo nombre");
+                            aux.setNombre(leer.next());
+                            break;
+                        case 2:
+                            System.out.println("Ingresa el nuevo apellido");
+                            aux.setApellido(leer.next());
+                            break;
+                        case 3:
+                            System.out.println("Ingresa el nuevo nacionalidad");
+                            aux.setNacionalidad(leer.next());
+                            break;
+                        case 4:
+                            System.out.println("Ingresa el nuevo dia de nacimiento");
+                            aux.setDia(leer.nextInt());
+                            break;
+                        case 5:
+                            System.out.println("Ingresa el nuevo mes de nacimiento");
+                            aux.setMes(leer.nextInt());
+                            break;
+                        case 6:
+                            System.out.println("Ingresa el nuevo año de nacimiento");
+                            aux.setAnio(leer.nextInt());
+                            break;
+                        case 7:
+                            System.out.println("Edición terminada. Bye!");                            
+                            break;
+                        default:
+                            System.out.println("Elección no válida, intenta nuevamente");
+                    }
+                } while (option != 7);
+                //f.add(aux);//ESTA ADICIÓN SOLO SIRVE CUANDO EL 
+
+            }
+        }
+    }
+    
+    public void eliminarEstudiante(ArrayList<Alumnos> g){
+        System.out.println("Escribe el nombre del estudiante que deseas eliminar");
+        String nombre = leer.next();
+        Iterator<Alumnos> it = g.iterator();
+        
+        while (it.hasNext()) {
+            if (it.next().getNombre().equalsIgnoreCase(nombre)) {
+                it.remove();                
+            }           
+        }      
+       
+    }
+
     public void menu() {
         ArrayList<Alumnos> listaAlumnos = new ArrayList();
         int option;
@@ -190,14 +261,14 @@ public class AlumnosService {
             System.out.println("Elige una opción del menú: "
                     + "\n 1 - Cargar primeros 20 estudiantes "
                     + "\n 2 - Agregar un nuevo estudiante"
-                    + "\n   - Editar los datos de un estudiante"
-                    + "\n   - Eliminar un estudiante"
-                    + "\n 3 - Ordenar estudiantes por apellido, forma ascendente"
-                    + "\n 4 - Ordenar estudiantes por nombre, forma descendente"
-                    + "\n 5 - Validar la edad de un estudiante"
-                    + "\n 6 - Solicitar un reporte final "
-                    + "\n 7 - Imprimir listado de estudiantes"
-                    + "\n 8 - Salir");
+                    + "\n 3 - Editar los datos de un estudiante"
+                    + "\n 4 - Eliminar un estudiante"
+                    + "\n 5 - Ordenar estudiantes por apellido, forma ascendente"
+                    + "\n 6 - Ordenar estudiantes por nombre, forma descendente"
+                    + "\n 7 - Validar la edad de un estudiante"
+                    + "\n 8 - Solicitar un reporte final "
+                    + "\n 9 - Imprimir listado de estudiantes"
+                    + "\n 10 - Salir");
             option = leer.nextInt();
 
             switch (option) {
@@ -211,32 +282,44 @@ public class AlumnosService {
                 case 2:
                     System.out.println("--------------------------------------------");
                     altaAlumno(listaAlumnos);
+                    System.out.println("Alumno nuevo ingresado...");
                     break;
                 case 3:
                     System.out.println("--------------------------------------------");
-                    Collections.sort(listaAlumnos, Comparadores.ordenPorApellidoAsce);
+                    editarDatos(listaAlumnos);
                     break;
                 case 4:
                     System.out.println("--------------------------------------------");
-                    Collections.sort(listaAlumnos, Comparadores.ordenPorNombreDescen);
+                    eliminarEstudiante(listaAlumnos);
+                    System.out.println("Estudiante eliminado...");
                     break;
                 case 5:
+                    System.out.println("--------------------------------------------");
+                    Collections.sort(listaAlumnos, Comparadores.ordenPorApellidoAsce);
+                    System.out.println("Lista ordenada...");
+                    break;
+                case 6:
+                    System.out.println("--------------------------------------------");
+                    Collections.sort(listaAlumnos, Comparadores.ordenPorNombreDescen);
+                    System.out.println("Lista ordenada...");
+                    break;
+                case 7:
                     System.out.println("--------------------------------------------");
                     Alumnos alumno = validarEstudiante(listaAlumnos);
                     System.out.println("La edad de " + alumno.getNombre() + " es " + calculadoraEdad(alumno) + " años");
                     break;
-                case 6:
+                case 8:
                     System.out.println("--------------------------------------------");
                     System.out.println("*** Reporte final ***");
                     alumnosMayores25(listaAlumnos);
                     inicialesAlumnos(listaAlumnos);
                     clasificacionNacionalidad(listaAlumnos);
                     break;
-                case 7:
+                case 9:
                     System.out.println("--------------------------------------------");
                     imprimirArrayList(listaAlumnos);
                     break;
-                case 8:
+                case 10:
                     System.out.println("--------------------------------------------");
                     System.out.println("Bye!");
                     break;
@@ -245,7 +328,7 @@ public class AlumnosService {
                     System.out.println("Opción no válida. Intente nuevamente");
             }
 
-        } while (option != 8);
+        } while (option != 10);
     }
 
 }
